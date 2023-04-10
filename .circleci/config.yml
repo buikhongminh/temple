@@ -15,14 +15,27 @@ jobs:
           - run:
               name: 
               command: |
-                aws cloudformation deploy \
-                  --template-file template.yml \
-                  --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
-                  --region us-east-1
+                apk add --update ansible
+          - run:
+              name: Configure server
+              command: |
+                ansible-playbook -i inventory.txt playbook.yml 
+    configure_infrastructure:  # Choose any name, such as `build`
+        # The primary container, where your job's commands will run
+        docker:
+          - image: python:3.7-alpine3.11
+        steps:
+          - checkout
+          -add_ssh_keys:
+              Fingerprint: ["c1:e7:aa:f3:f7:c1:f3:28:83:9f:70:75:8c:a6:df:6f"]
+          - run:
+              name: Install dependencies
+              command: |
+                ansible-playbook -i inventory main.yml
 # Sequential workflow
 workflows:
     # Name the workflow
     myWorkflow:
       jobs:
-        - create_infrastructure
+        - configure_infrastructure
         
