@@ -26,7 +26,7 @@ jobs:
           - image: python:3.7-alpine3.11
         steps:
           - checkout
-          -add_ssh_keys:
+          - add_ssh_keys:
               Fingerprint: ["c1:e7:aa:f3:f7:c1:f3:28:83:9f:70:75:8c:a6:df:6f"]
           - run:
               name: Install dependencies
