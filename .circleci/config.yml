@@ -56,8 +56,8 @@ jobs:
                 --template-file template.yml \
                 --stack-name myStack-viet\
                 --region us-east-1
+
     smoke_test:  # Choose any name, such as `build`
-        # The primary container, where your job's commands will run
       docker:
         - image: alpine:latest
       steps:
