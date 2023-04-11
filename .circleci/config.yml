@@ -61,6 +61,7 @@ jobs:
       docker:
         - image: alpine:latest
       steps:
+        - checkout
         - run:
             name: Test Job
             command: |
