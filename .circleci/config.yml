@@ -45,21 +45,21 @@ jobs:
                 ansible-playbook -i inventory main.yml
 
     create_infrastructure: 
-    docker:
-      - image: amazon/aws-cli
-    steps:
-      - checkout
-      - run:
-          name: Create Cloudformation Stack
-          command: |
-            aws cloudformation deploy \
-              --template-file template.yml \
-              --stack-name myStack-viet\
-              --region us-east-1
-      # Fail the job intentionally to simulate an error.
-      # Uncomment the line below if you want to fail the current step
-      # - run: return 1
-      - destroy_environment
+      docker:
+        - image: amazon/aws-cli
+      steps:
+        - checkout
+        - run:
+            name: Create Cloudformation Stack
+            command: |
+              aws cloudformation deploy \
+                --template-file template.yml \
+                --stack-name myStack-viet\
+                --region us-east-1
+        # Fail the job intentionally to simulate an error.
+        # Uncomment the line below if you want to fail the current step
+        # - run: return 1
+        - destroy_environment
 
     smoke_test:  # Choose any name, such as `build`
         # The primary container, where your job's commands will run
