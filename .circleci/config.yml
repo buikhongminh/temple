@@ -67,7 +67,7 @@ jobs:
             command: |
               return 0
         - destroy_environment
-            when: on_fail
+        when: on_fail
   
 # Sequential workflow
 workflows:
